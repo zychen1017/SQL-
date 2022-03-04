@@ -1,0 +1,10 @@
+select 
+    count(q2.device_id)/count(q1.device_id) as avg_ret
+FROM
+(select  distinct device_id,date
+from question_practice_detail) q1
+left JOIN
+(SELECT distinct device_id, DATE
+from question_practice_detail) q2
+on q1.device_id = q2.device_id
+and q2.date = date_add(q1.date,interval 1 day);
